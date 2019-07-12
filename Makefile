@@ -91,13 +91,20 @@ LIBUTILSO	= libutil.$(SOEXTENSION)
 LIBUTILSOMAJOR	= libutil.$(LIBMAJOR).$(SOEXTENSION)
 endif
 
-all: $(LIBGIFSO) libgif.a $(LIBUTILSO) libutil.a $(UTILS)
+SHARED_LIBS = $(LIBGIFSO) $(LIBUTILSO)
+STATIC_LIBS = libgif.a libutil.a
+
+all: shared-lib static-lib $(UTILS)
 ifeq ($(UNAME), Darwin)
 else
 	$(MAKE) -C doc
 endif
 
-$(UTILS):: libgif.a libutil.a
+$(UTILS):: $(STATIC_LIBS)
+
+shared-lib: $(SHARED_LIBS)
+
+static-lib: $(STATIC_LIBS)
 
 $(LIBGIFSO): $(OBJECTS) $(HEADERS)
 ifeq ($(UNAME), Darwin)
@@ -120,7 +127,7 @@ libutil.a: $(UOBJECTS) $(UHEADERS)
 	$(AR) rcs libutil.a $(UOBJECTS)
 
 clean:
-	rm -f $(UTILS) $(TARGET) libgetarg.a libgif.a $(LIBGIFSO) libutil.a $(LIBUTILSO) *.o
+	rm -f $(UTILS) $(TARGET) libgetarg.a $(SHARED_LIBS) $(STATIC_LIBS) *.o
 	rm -f $(LIBGIFSOVER)
 	rm -f $(LIBGIFSOMAJOR)
 	rm -fr doc/*.[17] *.html doc/staging
@@ -145,12 +152,15 @@ install-bin: $(INSTALLABLE)
 install-include:
 	$(INSTALL) -d "$(DESTDIR)$(INCDIR)"
 	$(INSTALL) -m 644 gif_lib.h "$(DESTDIR)$(INCDIR)"
-install-lib:
+install-static-lib:
 	$(INSTALL) -d "$(DESTDIR)$(LIBDIR)"
 	$(INSTALL) -m 644 libgif.a "$(DESTDIR)$(LIBDIR)/libgif.a"
+install-shared-lib:
+	$(INSTALL) -d "$(DESTDIR)$(LIBDIR)"
 	$(INSTALL) -m 755 $(LIBGIFSO) "$(DESTDIR)$(LIBDIR)/$(LIBGIFSOVER)"
 	ln -sf $(LIBGIFSOVER) "$(DESTDIR)$(LIBDIR)/$(LIBGIFSOMAJOR)"
 	ln -sf $(LIBGIFSOMAJOR) "$(DESTDIR)$(LIBDIR)/$(LIBGIFSO)"
+install-lib: install-static-lib install-shared-lib
 install-man:
 	$(INSTALL) -d "$(DESTDIR)$(MANDIR)/man1" "$(DESTDIR)$(MANDIR)/man7"
 	$(INSTALL) -m 644 $(MANUAL_PAGES_1:xml=1) "$(DESTDIR)$(MANDIR)/man1"
