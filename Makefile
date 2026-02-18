@@ -125,7 +125,7 @@ $(LIBUTILSO): $(UOBJECTS) $(UHEADERS)
 ifeq ($(UNAME), Darwin)
 	$(CC) $(CFLAGS) -dynamiclib -current_version $(LIBVER) $(OBJECTS) -o $(LIBUTILSO)
 else
-	$(CC) $(CFLAGS) $(CPPLAGS) -shared $(LDFLAGS) -Wl,-soname -Wl,$(LIBUTILMAJOR) -o $(LIBUTILSO) $(UOBJECTS)
+	$(CC) $(CFLAGS) $(CPPLAGS) -shared $(LDFLAGS) -Wl,-soname -Wl,$(LIBUTILSOMAJOR) -o $(LIBUTILSO) $(UOBJECTS)
 endif
 
 libutil.a: $(UOBJECTS) $(UHEADERS)
