@@ -8,6 +8,12 @@
 # SPDX-FileCopyrightText: Copyright (C) Eric S. Raymond <esr@thyrsus.com>
 # SPDX-License-Identifier: MIT
 
+PREFIX ?= /usr/local
+BINDIR = $(PREFIX)/bin
+INCDIR = $(PREFIX)/include
+LIBDIR = $(PREFIX)/lib
+MANDIR = $(PREFIX)/share/man
+
 CC ?= gcc
 OFLAGS = -O0 -g
 OFLAGS  = -O2
@@ -16,12 +22,6 @@ CFLAGS  += -std=gnu99 -fPIC -Wall -Wno-format-truncation $(OFLAGS)
 SHELL = /bin/sh
 TAR = tar
 INSTALL = install
-
-PREFIX ?= /usr/local
-BINDIR = $(PREFIX)/bin
-INCDIR = $(PREFIX)/include
-LIBDIR = $(PREFIX)/lib
-MANDIR = $(PREFIX)/share/man
 
 # No user-serviceable parts below this line
 
@@ -41,6 +41,15 @@ UHEADERS = getarg.h
 UOBJECTS = $(USOURCES:.c=.o)
 
 UNAME:=$(shell uname)
+
+# Rules
+
+.PHONY: all distcheck check reflow cppcheck
+.PHONY: install install-bin install-include ibnstall-lib install-man
+.PHONY: uninstall uninstall-bin uninstall-include uninstall-lib uninstall-man
+.PHONY: version dist release refresh
+
+# Build
 
 # Some utilities are installed
 INSTALLABLE = \
@@ -128,13 +137,19 @@ clean:
 	rm -f $(LIBGIFSOMAJOR)
 	$(MAKE) --quiet -C doc clean
 
+# Validate
+
 check: all
 	$(MAKE) -C tests
 
 reflow:
 	@clang-format --style="{IndentWidth: 8, UseTab: ForIndentation}" -i $$(find . -name "*.[ch]")
 
-# Installation/uninstallation
+# cppcheck should run clean
+cppcheck:
+	@cppcheck --quiet --inline-suppr --template gcc --enable=all --suppress=unusedFunction --suppress=missingInclude --force *.[ch]
+
+# Install/uninstall
 
 ifeq ($(UNAME), Darwin)
 install: all install-bin install-include install-lib
@@ -170,10 +185,14 @@ uninstall-man:
 	cd "$(DESTDIR)$(MANDIR)/man1" && rm -f $(shell cd doc >/dev/null && echo *.1)
 	cd "$(DESTDIR)$(MANDIR)/man7" && rm -f $(shell cd doc >/dev/null && echo *.7)
 
-# Make distribution tarball
+# Export
 #
 # We include all of the XML, and also generated manual pages
 # so people working from the distribution tarball won't need xmlto.
+
+# Check that getversion hasn't gone pear-shaped.
+version:
+	@echo $(VERSION)
 
 EXTRAS =     README.adoc \
 	     NEWS \
@@ -197,15 +216,7 @@ giflib-$(VERSION).tar.bz2: $(ALL)
 
 dist: giflib-$(VERSION).tar.gz giflib-$(VERSION).tar.bz2
 
-# Auditing tools.
-
-# Check that getversion hasn't gone pear-shaped.
-version:
-	@echo $(VERSION)
-
-# cppcheck should run clean
-cppcheck:
-	@cppcheck --quiet --inline-suppr --template gcc --enable=all --suppress=unusedFunction --suppress=missingInclude --force *.[ch]
+# Export
 
 # Verify the build
 distcheck: all
@@ -225,3 +236,5 @@ refresh: all
 	$(MAKE) -C doc website
 	shipper --no-stale -w version=$(VERSION) | sh -e -x
 	rm -fr doc/staging
+
+# end
