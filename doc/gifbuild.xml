@@ -98,7 +98,7 @@ required newline.</para>
 aren't obvious to you, what are you doing with this software?</para>
 
 <para>The <quote>pixel aspect byte</quote> declaration sets an integer 
-denominator for a fraction expressing the puxel aspect ratio.  See the
+denominator for a fraction expressing the pixel aspect ratio.  See the
 GIF standard for details; this field is actually long obsolete.</para>
 
 <para>A color table declares color indices (in ascending order from 0)

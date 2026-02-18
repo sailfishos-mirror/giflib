@@ -44,7 +44,7 @@ UNAME:=$(shell uname)
 
 # Rules
 
-.PHONY: all distcheck check reflow cppcheck
+.PHONY: all distcheck check reflow cppcheck spellcheck
 .PHONY: install install-bin install-include ibnstall-lib install-man
 .PHONY: uninstall uninstall-bin uninstall-include uninstall-lib uninstall-man
 .PHONY: version dist release refresh
@@ -148,6 +148,9 @@ reflow:
 # cppcheck should run clean
 cppcheck:
 	@cppcheck --quiet --inline-suppr --template gcc --enable=all --suppress=unusedFunction --suppress=missingInclude --force *.[ch]
+
+spellcheck:
+	@spellcheck local.dic doc/*.xml
 
 # Install/uninstall
 

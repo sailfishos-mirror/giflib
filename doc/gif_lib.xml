@@ -232,7 +232,7 @@ int EGifSpew(GifFileType *GifFile)
 <para>writes a complete (possibly multi-image) GIF file to the indicated file
 handle from in-core allocated structures created by a previous DGifSlurp()
 or equivalent operations.  Its argument is a GIF file descriptor, which
-imnplicitly points to storage previously allocated by DGifSlurp().</para>
+implicitly points to storage previously allocated by DGifSlurp().</para>
 
 <para>The file is written with a GIF87 stamp unless it contains one of the four
 special extension blocks defined in GIF89, in which case it is written
