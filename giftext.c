@@ -109,7 +109,7 @@ int main(int argc, char **argv) {
 			printf("\tSort Flag: %s\n",
 			       GifFile->SColorMap->SortFlag ? "on" : "off");
 			for (i = 0; i < Len; i += 4) {
-				for (j = 0; j < 4 && j < Len; j++) {
+				for (j = 0; j < 4 && i + j < Len; j++) {
 					printf("%3d: %02xh %02xh %02xh   ",
 					       i + j,
 					       GifFile->SColorMap->Colors[i + j]

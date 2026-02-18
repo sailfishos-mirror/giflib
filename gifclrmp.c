@@ -385,6 +385,10 @@ static ColorMapObject *ModifyColorMap(ColorMapObject *ColorMap) {
 
 		/* Apply the translation; we'll do it to the pixels, too */
 		for (i = 0; i < ColorMap->ColorCount; i++) {
+			if (Translation[i] >= ColorMap->ColorCount) {
+				GIF_EXIT(
+				    "Color map translation index out of range.");
+			}
 			NewMap->Colors[i] = ColorMap->Colors[Translation[i]];
 		}
 
