@@ -164,11 +164,19 @@ static void Icon2Gif(char *FileName, FILE *txtin, bool GifNoisyPrint,
 
 		if (sscanf(buf, "screen width %d\n", &GifFileOut->SWidth) ==
 		    1) {
+			if (GifFileOut->SWidth <= 0) {
+				PARSE_ERROR("Invalid screen width.");
+				exit(EXIT_FAILURE);
+			}
 			continue;
 		}
 
 		else if (sscanf(buf, "screen height %d\n",
 		                &GifFileOut->SHeight) == 1) {
+			if (GifFileOut->SHeight <= 0) {
+				PARSE_ERROR("Invalid screen height.");
+				exit(EXIT_FAILURE);
+			}
 			continue;
 		}
 
@@ -585,12 +593,26 @@ static void Icon2Gif(char *FileName, FILE *txtin, bool GifNoisyPrint,
 			static GifPixelType *Raster;
 			int c;
 			bool hex = (strstr(buf, "hex") != NULL);
+			size_t pixel_count;
+
+			if (NewImage->ImageDesc.Width <= 0 ||
+			    NewImage->ImageDesc.Height <= 0 ||
+			    NewImage->ImageDesc.Width >
+			        INT_MAX / NewImage->ImageDesc.Height) {
+				PARSE_ERROR("Invalid image dimensions.");
+				exit(EXIT_FAILURE);
+			}
+
+			pixel_count = (size_t)NewImage->ImageDesc.Width *
+			              (size_t)NewImage->ImageDesc.Height;
+			if (pixel_count > SIZE_MAX / sizeof(GifPixelType)) {
+				PARSE_ERROR("Image dimensions overflow.");
+				exit(EXIT_FAILURE);
+			}
 
 			/* coverity[overflow_sink] */
 			if ((Raster = (GifPixelType *)malloc(
-			         sizeof(GifPixelType) *
-			         NewImage->ImageDesc.Width *
-			         NewImage->ImageDesc.Height)) == NULL) {
+			         sizeof(GifPixelType) * pixel_count)) == NULL) {
 				PARSE_ERROR("Failed to allocate raster block, "
 				            "aborted.");
 				exit(EXIT_FAILURE);
