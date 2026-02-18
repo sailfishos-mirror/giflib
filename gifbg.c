@@ -86,6 +86,14 @@ int main(int argc, char **argv) {
 		exit(EXIT_SUCCESS);
 	}
 
+	/* Validate image dimensions early to avoid overflow/negative values. */
+	if (ImageWidth <= 0 || ImageHeight <= 0) {
+		GIF_EXIT("Image size must be positive.");
+	}
+	if (ImageWidth > INT_MAX / 2) {
+		GIF_EXIT("Image width too large.");
+	}
+
 	/* Make sure intensities are in the right range: */
 	if (MinimumIntensity < 0 || MinimumIntensity > 100 ||
 	    MaximumIntensity < 0 || MaximumIntensity > 100) {
