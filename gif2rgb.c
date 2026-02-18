@@ -254,8 +254,10 @@ static void DumpScreen2RGB(char *FileName, int OneFileFlag,
 			char OneFileName[80];
 
 			for (i = 0; i < 3; i++) {
+				OneFileName[0] = '\0';
 				strncpy(OneFileName, FileName,
 				        sizeof(OneFileName) - 1);
+				OneFileName[sizeof(OneFileName) - 1] = '\0';
 				strncat(OneFileName, Postfixes[i],
 				        sizeof(OneFileName) - 1 -
 				            strlen(OneFileName));
