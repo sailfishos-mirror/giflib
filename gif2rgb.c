@@ -327,6 +327,11 @@ static void DumpScreen2RGB(char *FileName, int OneFileFlag,
 			GifRow = ScreenBuffer[i];
 			GifQprintf("\b\b\b\b%-4d", ScreenHeight - i);
 			for (j = 0; j < ScreenWidth; j++) {
+				/* Check if color is within color palete */
+				if (GifRow[j] >= ColorMap->ColorCount) {
+					GIF_EXIT(GifErrorString(
+					    D_GIF_ERR_IMAGE_DEFECT));
+				}
 				ColorMapEntry = &ColorMap->Colors[GifRow[j]];
 				Buffers[0][j] = ColorMapEntry->Red;
 				Buffers[1][j] = ColorMapEntry->Green;
