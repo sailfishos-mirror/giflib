@@ -238,7 +238,7 @@ giflib-$(VERSION).tar.gz: $(ALL)
 	rm -fr giflib-$(VERSION)
 	ls -l giflib-$(VERSION).tar.gz
 
-dist: giflib-$(VERSION).tar.gz giflib-$(VERSION).tar.bz2
+dist: giflib-$(VERSION).tar.gz
 
 # Verify the build
 distcheck: all
