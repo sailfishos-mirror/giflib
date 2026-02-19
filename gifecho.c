@@ -114,6 +114,9 @@ int main(int argc, char **argv) {
 	for (i = 0; i < GIF_FONT_HEIGHT; i++) {
 		if ((RasterBuffer[i] = (GifRowType)malloc(
 		         sizeof(GifPixelType) * ImageWidth)) == NULL) {
+			while (--i >= 0) {
+				free((char *)RasterBuffer[i]);
+			}
 			GIF_EXIT(
 			    "Failed to allocate memory required, aborted.");
 		}
@@ -179,6 +182,16 @@ int main(int argc, char **argv) {
 		PrintGifError(ErrorCode);
 		exit(EXIT_FAILURE);
 	}
+
+	for (i = 0; i < GIF_FONT_HEIGHT; i++) {
+		free((char *)RasterBuffer[i]);
+	}
+	if (!TextLineFlag) {
+		for (i = 0; i < NumOfLines; i++) {
+			free(TextLines[i]);
+		}
+	}
+	GifFreeMapObject(ColorMap);
 
 	return 0;
 }
