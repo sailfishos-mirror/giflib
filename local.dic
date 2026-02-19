@@ -12,7 +12,6 @@ ColorTransIn
 ColorUnion
 CtrlStr
 DGIF
-DGIfSlurp
 DGif
 DGifClose
 DGifCloseFile
@@ -33,7 +32,6 @@ DGifOpenFileName
 DGifSavedExtensionToGCB
 DGifSlurp
 DSCR
-DgifGetCodeNext
 EGIF
 EGif
 EGifClose
@@ -70,7 +68,6 @@ FileHandle
 FreeExtension
 FreeMapObject
 FreeSavedImages
-GAGetARgs
 GAGetArgs
 GAPrintErrMsg
 GAPrintHowTo
@@ -155,8 +152,6 @@ UndefinedRecordType
 UnionColorMap
 VoidPtr
 YCM
-accessable
-aftert
 argc
 argv
 ascii
@@ -171,9 +166,7 @@ colormap
 colormap-file
 colormap-size
 colormaps
-colr
 const
-cordinates
 deallocate
 deallocating
 deconverter
@@ -183,7 +176,6 @@ egif
 errorname
 fg
 getarg
-ggraphics
 gif
 gif-file
 gifalloc
