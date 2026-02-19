@@ -8,7 +8,35 @@ Code Fixes
 
 * Fix for CVE-2021-40633.
 
-Address SF issue #169: GifQuantizeBuffer function prototype mismatch
+* Fix SF bug #165 EGifSpew leaks GifFileOut->SColorMap
+
+* Fix SF bug #171 ImageMagick required to build giflib on non-Darwin Platforms
+
+* Fix SF bug #172 Incorrect object files in shared libutil on darwin
+
+* Fix SF bug #173 installation of manual pages and html documentation
+
+* Fix SF bug #175 Memory leaks in gifecho.c's main() and in gifalloc.c's GifMakeMapObject
+
+* Fix SF bug #177 wrong pointer used in giftool getbool
+
+* Fix SF bug #179 Path Traversal vulnerability
+
+* Fix SF bug #180: -Wformat-truncation likely pointing out an actual bug
+
+* Fix SF bug #182 out‐of‐bounds writes in Icon2Gif
+
+* Fix SF bug #184 uninitialized buffer in DumpScreen2RGB
+
+* Fix SF bug #185 integer overflow in gifbg.c
+
+* Fix SF bug #186 integer overflow in Icon2Gif
+
+* Fix SF bug #187: CVE-2025-31344
+
+* Fix SF bug #170 Tests failing on Ubuntu Noble, giftext buffer overflow
+
+Other bugs that duplicate these have breen addressesed by these fuxes
 
 Tests
 -----

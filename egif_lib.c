@@ -276,7 +276,7 @@ int EGifPutScreenDesc(GifFileType *GifFile, const int Width, const int Height,
 	GifByteType Buf[3];
 	GifFilePrivateType *Private = (GifFilePrivateType *)GifFile->Private;
 	const char *write_version;
-	GifFile->SColorMap = NULL;
+	ColorMapObject *old_map = GifFile->SColorMap;
 
 	if (Private->FileState & FILE_STATE_SCREEN) {
 		/* If already has screen descriptor - something is wrong! */
@@ -302,15 +302,24 @@ int EGifPutScreenDesc(GifFileType *GifFile, const int Width, const int Height,
 	GifFile->SHeight = Height;
 	GifFile->SColorResolution = ColorRes;
 	GifFile->SBackGroundColor = BackGround;
-	if (ColorMap) {
+	if (ColorMap == NULL) {
+		if (old_map != NULL) {
+			GifFreeMapObject(old_map);
+		}
+		GifFile->SColorMap = NULL;
+	} else if (ColorMap == old_map) {
+		/* Reuse existing map to avoid a redundant copy. */
+		GifFile->SColorMap = old_map;
+	} else {
+		if (old_map != NULL) {
+			GifFreeMapObject(old_map);
+		}
 		GifFile->SColorMap =
 		    GifMakeMapObject(ColorMap->ColorCount, ColorMap->Colors);
 		if (GifFile->SColorMap == NULL) {
 			GifFile->Error = E_GIF_ERR_NOT_ENOUGH_MEM;
 			return GIF_ERROR;
 		}
-	} else {
-		GifFile->SColorMap = NULL;
 	}
 
 	/*
