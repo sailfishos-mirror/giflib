@@ -35,6 +35,39 @@ static char *CtrlStr = PROGRAM_NAME " v%- s%-MinFileSize!d h%- GifFile!*s";
 
 static int MinFileSize = DEFAULT_MIN_FILE_SIZE;
 
+#ifndef _WIN32
+#define IS_PATH_SEP(c) ((c) == '/')
+#else
+#define IS_PATH_SEP(c) ((c) == '/' || (c) == '\\')
+#endif
+
+static bool IsUnsafePath(const char *path) {
+	const unsigned char *p = (const unsigned char *)path;
+
+	if (path == NULL || *path == '\0') {
+		return true;
+	}
+
+	/* Absolute paths or drive-qualified paths are not allowed. */
+	if (IS_PATH_SEP(p[0])) {
+		return true;
+	}
+	if (isalpha(p[0]) && p[1] == ':') {
+		return true;
+	}
+
+	/* Reject any ".." path segment. */
+	for (p = (const unsigned char *)path; *p != '\0'; p++) {
+		if (p[0] == '.' && p[1] == '.' &&
+		    (p == (const unsigned char *)path || IS_PATH_SEP(p[-1])) &&
+		    (p[2] == '\0' || IS_PATH_SEP(p[2]))) {
+			return true;
+		}
+	}
+
+	return false;
+}
+
 #ifdef _WIN32
 #include <errno.h>
 #include <sys/stat.h>
@@ -105,6 +138,9 @@ int main(int argc, char **argv) {
 	/* predictable names, but it's not worth the effort and risk to fix. */
 	if (*FileName == NULL) {
 		GIF_EXIT("No valid Filename given.");
+	}
+	if (IsUnsafePath(*FileName)) {
+		GIF_EXIT("Unsafe filename (absolute path or traversal).");
 	}
 	if (strlen(*FileName) > STRLEN - 1) {
 		GIF_EXIT("Filename too long.");
