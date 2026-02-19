@@ -2,6 +2,7 @@
 # It's project metadata for the shipper tool
 
 Package: giflib
+
 XBS-Packaged-As: giflib
 
 Destinations: ~,sourceforge
@@ -13,10 +14,12 @@ Description: a library for rendering and generating GIF image files.
 
 XBS-Web-Directory: doc/staging
 XBS-Logo: doc/staging/giflib-logo.gif
-XBS-SourceForge-Folder: giflib-5.x
+XBS-SourceForge-Folder: giflib-6.x
 
 XBS-Packaged-As: giflib
 
 XBS-VC-Tag-Template: %(version)s
 
 #XBS-Project-Tags: GIF, graphics
+
+XBS-Validate: make check spellcheck
