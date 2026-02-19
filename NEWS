@@ -36,6 +36,9 @@ Code Fixes
 
 * Fix SF bug #170 Tests failing on Ubuntu Noble, giftext buffer overflow
 
+* FixSF bug #165 EGifSpew leaks GifFileOut->SColorMap
+
+
 Other bugs that duplicate these have breen addressesed by these fuxes
 
 Tests
