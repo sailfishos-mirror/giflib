@@ -17,7 +17,7 @@ MANDIR = $(PREFIX)/share/man
 CC ?= gcc
 OFLAGS = -O0 -g
 OFLAGS  = -O2
-CFLAGS  += -std=gnu99 -fPIC -Wall -Wno-format-truncation $(OFLAGS)
+CFLAGS  += -std=gnu99 -fPIC -Wall $(OFLAGS)
 
 SHELL = /bin/sh
 TAR = tar
