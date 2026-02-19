@@ -37,7 +37,6 @@ a browser at the project website: &project;.</para>
 <refsect1><title>See Also</title>
 
 <para>
-<citerefentry><refentrytitle>gif2rgb</refentrytitle><manvolnum>1</manvolnum></citerefentry>,
 <citerefentry><refentrytitle>gifbuild</refentrytitle><manvolnum>1</manvolnum></citerefentry>,
 <citerefentry><refentrytitle>giffix</refentrytitle><manvolnum>1</manvolnum></citerefentry>,
 <citerefentry><refentrytitle>giftext</refentrytitle><manvolnum>1</manvolnum></citerefentry>,
@@ -52,4 +51,3 @@ a browser at the project website: &project;.</para>
 
 </refsect1>
 </refentry>
-

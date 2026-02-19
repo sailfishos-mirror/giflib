@@ -19,9 +19,8 @@ all: allhtml manpages
 
 # The distinction between XMLMAN and XMLINTERNAL is because
 # some pages shouldn't be installed as part of a binary package;
-# they're just for test-pattern generators.
+# they're just for test-pattern generators or obsolete utilities.
 XMLMAN1 = \
-	gif2rgb.xml \
 	gifbuild.xml \
 	gifclrmp.xml \
 	giffilter.xml \
@@ -32,6 +31,7 @@ XMLMAN1 = \
 XMLMAN7 = \
 	giflib.xml
 XMLINTERNAL = \
+	gif2rgb.xml \
 	gifbg.xml \
 	gifcolor.xml \
 	gifecho.xml \

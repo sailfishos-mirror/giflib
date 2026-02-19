@@ -34,27 +34,31 @@ rebuild: render-rebuild \
 
 UTILS = ..
 PICS = ../pic
+GIF2RGB = ../gif2rgb
+
+$(GIF2RGB):
+	@$(MAKE) -C .. gif2rgb
 
 GIFS := $(shell ls ../pic/*.gif)
 
 # Test decompression and rendering by unpacking images,
 # converting them to RGB, and comparing that result to a check file.
-render-regress:
+render-regress: $(GIF2RGB)
 	@for test in $(GIFS); \
 	do \
 	    stem=`basename $${test} | sed -e "s/.gif$$//"`; \
 	    $(UTILS)/gif2rgb -1 <$${test} | ./cmpdiffer "gif2rgb: test of $${test}" $${stem}.rgb; \
 	done
-render-rebuild:
+render-rebuild: $(GIF2RGB)
 	@for test in $(GIFS); do \
 		stem=`basename $${test} | sed -e "s/.gif$$//"`; \
 		echo "Remaking $${stem}.rgb"; \
 		$(UTILS)/gif2rgb -1 -o $${stem}.rgb $${test}; \
 	done
 
-gif2rgb-regress:
+gif2rgb-regress: $(GIF2RGB)
 	@$(UTILS)/gif2rgb -c 3 -s 100 100 <gifgrid.rgb | $(UTILS)/gifbuild -d | sed "/sort flag/s/off/on/" | ./tapdiffer "checking gif2rgb idempotency" gifgrid.ico
-gif2rgb-rebuild:
+gif2rgb-rebuild: $(GIF2RGB)
 	@echo "Rebuilding gif2rgb checkfile."
 	@$(UTILS)/gif2rgb -c 3 -s 100 100 <gifgrid.rgb | $(UTILS)/gifbuild -d >gifgrid.ico
 
@@ -93,7 +97,7 @@ gifecho-rebuild:
 gifecho-regress:
 	@$(UTILS)/gifecho -t "foobar" | $(UTILS)/gifbuild -d | ./tapdiffer "gifecho: Testing gifecho behavior" foobar.ico
 
-giffilter-regress:
+giffilter-regress: $(GIF2RGB)
 	@for test in $(GIFS); \
 	do \
 	    stem=`basename $${test} | sed -e "s/.gif$$//"`; \
@@ -120,7 +124,7 @@ gifinto-regress:
 	fi
 	@rm -f $@.giflib.tmp
 
-gifsponge-regress:
+gifsponge-regress: $(GIF2RGB)
 	@for test in $(GIFS); \
 	do \
 	    stem=`basename $${test} | sed -e "s/.gif$$//"`; \
@@ -140,7 +144,7 @@ giftext-rebuild:
 		$(UTILS)/giftext <$${test} >$${stem}.dmp; \
 	done
 
-giftool-regress:
+giftool-regress: $(GIF2RGB)
 	@$(UTILS)/giftool <$(PICS)/gifgrid.gif | $(UTILS)/gif2rgb | ./cmpdiffer "giftool: expensive copy via giftool" gifgrid.rgb
 	@$(UTILS)/giftool -i on <$(PICS)/treescap-interlaced.gif | $(UTILS)/gif2rgb | ./cmpdiffer "giftool: deinterlace" treescap.rgb
 	@$(UTILS)/giftool -i off <$(PICS)/treescap.gif | $(UTILS)/gif2rgb | ./cmpdiffer "giftool: interlace" treescap-interlaced.rgb

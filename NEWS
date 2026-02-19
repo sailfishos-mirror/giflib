@@ -9,9 +9,19 @@ to pass out a detailed error code). The internal error
 codes in the E_GIF_ERR series have changed value so none of them
 collides with GIF_ERROR.
 
-The only library fixes in this release were for some memory leaks
-that could only triggered by severely malformed GIFs.  Other bugs
-are edge-cases faiures in the CLI tools.
+This code has been systematically audited and hardened wuth
+ChatGPT-5.2. The only library fixes reported by users or found by
+robot were for some memory leaks that could only triggered by severely
+malformed GIFs. Other bugs are edge-case failures in the CLI tools.
+
+The gif2rbg CLI tool has been moved to the "obsolete" bin, because its
+only deployment case in 2026 is as a piñata at fuzzer parties.
+
+Warning: the CLI tools in the obsolete category will soon be removed
+from the distribution entirely. The maintainer is tired of fielding
+junk bugs filed against them by would-be coup-counters who found yet
+another edge case, and the rest of the world doesn't need noisy CVEs
+that aren't actually DoS or security issues for giflib clients.
 
 Code Fixes
 ----------

@@ -76,18 +76,6 @@ list of references. It's meant to be seen through man(1) only as part
 of a local installation of the tools.
 -->
 
-<sect2><title>Conversion Utilities</title>
-
-<variablelist>
-<varlistentry>
-<term><ulink url="gif2rgb.html">gif2rgb</ulink></term>
-<listitem>
-<para>convert images saved as GIF to 24-bit RGB image(s) or vice-versa</para>
-</listitem>
-</varlistentry>
-</variablelist>
-
-</sect2>
 <sect2><title>Image Manipulation Components</title>
 
 <variablelist>
@@ -142,6 +130,12 @@ of a local installation of the tools.
 installed by a normal build.</para>
 
 <variablelist>
+<varlistentry>
+<term><ulink url="gif2rgb.html">gif2rgb</ulink></term>
+<listitem>
+<para>convert images saved as GIF to 24-bit RGB image(s) or vice-versa</para>
+</listitem>
+</varlistentry>
 <varlistentry>
 <term><ulink url="gifbg.html">gifbg</ulink></term>
 <listitem>

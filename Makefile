@@ -55,7 +55,6 @@ UNAME:=$(shell uname)
 
 # Some utilities are installed
 INSTALLABLE = \
-	gif2rgb \
 	gifbuild \
 	giffix \
 	giftext \
@@ -73,12 +72,12 @@ UTILS = $(INSTALLABLE) \
 	gifhisto \
 	gifinto \
 	gifsponge \
-	gifwedge
+	gifwedge \
+	gif2rgb
 
 LDLIBS=libgif.a -lm
 
 MANUAL_PAGES_1 = \
-	doc/gif2rgb.xml \
 	doc/gifbuild.xml \
 	doc/gifclrmp.xml \
 	doc/giffix.xml \
@@ -143,7 +142,7 @@ libutil.a: $(UOBJECTS) $(UHEADERS)
 	$(AR) rcs libutil.a $(UOBJECTS)
 
 clean:
-	rm -f $(UTILS) $(TARGET) libgetarg.a $(SHARED_LIBS) $(STATIC_LIBS) *.o
+	rm -f $(UTILS) $(OBSOLETE_UTILS) $(TARGET) libgetarg.a $(SHARED_LIBS) $(STATIC_LIBS) *.o
 	rm -f $(LIBGIFSOVER)
 	rm -f $(LIBGIFSOMAJOR)
 	$(MAKE) --quiet -C doc clean
@@ -155,6 +154,8 @@ check: all
 
 reflow:
 	@clang-format --style="{IndentWidth: 8, UseTab: ForIndentation}" -i $$(find . -name "*.[ch]")
+
+obsolete-utils: $(OBSOLETE_UTILS)
 
 # cppcheck should run clean
 cppcheck:
