@@ -133,7 +133,7 @@ libgif.a: $(OBJECTS) $(HEADERS)
 
 $(LIBUTILSO): $(UOBJECTS) $(UHEADERS)
 ifeq ($(UNAME), Darwin)
-	$(CC) $(CFLAGS) -dynamiclib -current_version $(LIBVER) $(OBJECTS) -o $(LIBUTILSO)
+	$(CC) $(CFLAGS) -dynamiclib -current_version $(LIBVER) $(UOBJECTS) -o $(LIBUTILSO)
 else
 	$(CC) $(CFLAGS) $(CPPLAGS) -shared $(LDFLAGS) -Wl,-soname -Wl,$(LIBUTILSOMAJOR) -o $(LIBUTILSO) $(UOBJECTS)
 endif
