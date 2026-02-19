@@ -709,7 +709,10 @@ static void Icon2Gif(char *FileName, FILE *txtin, bool GifNoisyPrint,
 	// LeadingExtensionBlockCount = 0;
 	LeadingExtensionBlocks = NULL;
 
-	EGifSpew(GifFileOut);
+	if (EGifSpew(GifFileOut, &ErrorCode) == GIF_ERROR) {
+		PrintGifError(ErrorCode);
+		exit(EXIT_FAILURE);
+	}
 }
 
 static void VisibleDumpBuffer(GifByteType *buf, int len)

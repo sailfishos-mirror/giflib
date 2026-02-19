@@ -226,13 +226,16 @@ described in a later section.</para>
 <para>The high-level function</para>
 
 <programlisting id="EGifSpew">
-int EGifSpew(GifFileType *GifFile)
+int EGifSpew(GifFileType *GifFile, int *ErrorCode)
 </programlisting>
 
 <para>writes a complete (possibly multi-image) GIF file to the indicated file
 handle from in-core allocated structures created by a previous DGifSlurp()
 or equivalent operations.  Its argument is a GIF file descriptor, which
 implicitly points to storage previously allocated by DGifSlurp().</para>
+
+<para>If ErrorCode is non-NULL, it returns a GIFLIB error code on failure;
+otherwise it may be NULL.  The function returns GIF_OK or GIF_ERROR.</para>
 
 <para>The file is written with a GIF87 stamp unless it contains one of the four
 special extension blocks defined in GIF89, in which case it is written

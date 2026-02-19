@@ -1097,7 +1097,7 @@ static int EGifWriteExtensions(GifFileType *GifFileOut,
 	return (GIF_OK);
 }
 
-int EGifSpewEx(GifFileType *GifFileOut, int *ErrorCode) {
+int EGifSpew(GifFileType *GifFileOut, int *ErrorCode) {
 	int i, j;
 	int status = GIF_OK;
 	int err = E_GIF_SUCCEEDED;
@@ -1199,10 +1199,6 @@ cleanup:
 	}
 
 	return status;
-}
-
-int EGifSpew(GifFileType *GifFileOut) {
-	return EGifSpewEx(GifFileOut, NULL);
 }
 
 /* end */

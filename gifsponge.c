@@ -76,7 +76,7 @@ int main(int argc, char **argv) {
 	 * data; it's *your* responsibility to keep your changes consistent.
 	 * Caveat hacker!
 	 */
-	if (EGifSpewEx(GifFileOut, &ErrorCode) == GIF_ERROR) {
+	if (EGifSpew(GifFileOut, &ErrorCode) == GIF_ERROR) {
 		PrintGifError(ErrorCode);
 	}
 

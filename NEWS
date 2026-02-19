@@ -3,6 +3,16 @@
 Repository head
 ===============
 
+This release bumps the major version, but only one entry point -
+EGifSpew() - has changed signature and behavior (in order to be able
+to pass out a detailed error code). The internal error
+codes in the E_GIF_ERR series have changed value so none of them
+collides with GIF_ERROR.
+
+The only library fixes in this release were for some memory leaks
+that could only triggered by severely malformed GIFs.  Other bugs
+are edge-cases faiures in the CLI tools.
+
 Code Fixes
 ----------
 
@@ -42,7 +52,7 @@ Code Fixes
 
 * Fix SF bug #161 detected memory leaks in EGifOpenFileHandle giflib/egif_lib.c
 
-* Fix SF bug #142 ABI breakpublic symbol GifQuantizeBuffer
+* Fix SF bug #142 ABI break public symbol GifQuantizeBuffer
 
 Other bugs that duplicate these have breen addressesed by these fixes
 
@@ -84,9 +94,9 @@ Code Fixes
 
 * Address SF issue #145: Remove manual pages installation for binaries that are not installed too
 
-* Address SF issue #146: [PATCH] Limit installed man pages to binaries, move giflib to section 7
+* Address SF issue #146: Limit installed man pages to binaries, move giflib to section 7
 
-* Address SF issue #147 [PATCH] Fixes to doc/whatsinagif/ content
+* Address SF issue #147: Fixes to doc/whatsinagif/ content
 
 * Address SF issue #148: heap Out of Bound Read in gif2rgb.c:298 DumpScreen2RGB
 
