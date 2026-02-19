@@ -73,7 +73,9 @@ Other bugs that duplicate these have breen addressesed by these fixes
 Tests
 -----
 
-Test suite bow emits TAP (Test Anything Protocol).
+Test suite now emits TAP (Test Anything Protocol).
+
+==============================================================================
 
 Version 5.2.2
 =============
@@ -138,6 +140,8 @@ Code Fixes
 
 * Address SF issue #167: Heap-Buffer Overflow during Image Saving in DumpScreen2RGB Function at Line 321 of gif2rgb.c
 
+==============================================================================
+
 Version 5.2.1
 ==============
 
@@ -146,6 +150,8 @@ This is the "Maybe I shouldn't have done a release while in surgical recovery" r
 * In gifbuild.c, avoid a core dump on no color map.
 
 * Restore inadvertently removed library version numbers in Makefile.
+
+==============================================================================
 
 Version 5.2.0
 =============
@@ -167,6 +173,8 @@ release.
 
 * Apply SPDX convention for license tagging.
 
+==============================================================================
+
 Version 5.1.9
 =============
 
@@ -177,6 +185,8 @@ is applied to GIFs.
 * Address SF bug #129: The latest version of giflib cannot be build on windows.
 
 * Address SF bug #126: Cannot compile giflib using c89
+
+==============================================================================
 
 Version 5.1.8
 =============
@@ -193,10 +203,14 @@ Version 5.1.8
 
 * Address SF bug #120: 5.1.7 does not build a proper library - no 
 
+==============================================================================
+
 Version 5.1.7
 =============
 
 Correct a minor packaging error (superfluous symlinks) in the 5.1.6 tarballs.
+
+==============================================================================
 
 Version 5.1.6
 =============
@@ -205,6 +219,8 @@ Build Fixes
 -----------
 
 Fix library installation in the Makefile.
+
+==============================================================================
 
 Version 5.1.5
 =============
@@ -237,6 +253,8 @@ Build Fixes
 The horrible old autoconf build system has been removed with extreme prejudice. 
 You now build this simply by running "make" from the top-level directory.
 
+==============================================================================
+
 Version 5.1.4
 =============
 
@@ -250,6 +268,8 @@ Code Fixes
 * Fix SF Bug #93: Add bounds check in gifbuild netscape2.0 path
 
 * Fix SF Bug #89: Fix buffer overread in gifbuild.
+
+==============================================================================
 
 Version 5.1.3
 =============
@@ -275,6 +295,8 @@ Code Fixes
   introduced in 5.1.2.
 
 * Fix SF Bug #84: incorrect return of DGifSlurp().
+
+==============================================================================
 
 Version 5.1.2
 =============
@@ -315,6 +337,8 @@ Code Fixes
   SourceForge bug #77: dgif_lib.c: extension processing error
 
 
+==============================================================================
+
 Version 5.1.1
 =============
 
@@ -334,6 +358,8 @@ Build Fixes
 ----------
 
 * glibtoolize port fix for OS X.
+
+==============================================================================
 
 Version 5.1.0
 =============
@@ -370,6 +396,8 @@ Retirements
   conversion is better done with convert(1) from the ImageMagick suite,
   anyway.
 
+==============================================================================
+
 Version 5.0.6
 =============
 
@@ -382,12 +410,16 @@ less vulnerable to cross-platform skew due to qsort() being unstable.
 This shouldn't affect production use, it's just a cross-platform
 issue for regression testing 
 
+==============================================================================
+
 Version 5.0.5
 =============
 
 Set the error return properly when a screen descriptor read fails.
 Fixes for some minor API documentation bugs. Some internal manual
 pages are not to be installed.
+
+==============================================================================
 
 Version 5.0.4
 =============
@@ -396,10 +428,14 @@ Fix for a rare misrendering bug when a GIF overruns the decompression-code
 table. The image on which this was spotted was a relatively long-running 
 animated GIF; still images of ordinary size should have been immune.
 
+==============================================================================
+
 Version 5.0.3
 =============
 
 Fix a build-system glitch so it will install manpages.
+
+==============================================================================
 
 Version 5.0.2
 =============
@@ -412,6 +448,8 @@ Code Fixes
 ----------
 * Change unused return of EGifSetGifVersion() to void.
 * Buffer overrun prevention in gifinto.
+
+==============================================================================
 
 Version 5.0.1
 =============
@@ -433,6 +471,8 @@ Code Fixes
 * An EGifSetGifVersion() function taking a GifFile argument has been 
   added for use with the low-level sequential API. This change requires
   a bump of the library revision number.
+
+==============================================================================
 
 Version 5.0.0
 =============
@@ -571,6 +611,8 @@ Documentation and polish
   specification as well as GIF89's.
 * The project now has a logo.
 
+==============================================================================
+
 Version 4.2.0
 =============
 
@@ -649,10 +691,14 @@ Documentation
 * Documentation is now in DocBook-XML, so either HTML or man pages can
   be generated from it.
 
+==============================================================================
+
 Version 4.1.6
 =============
 Brown paper bag release.  Fix a problem with header inclusion that could
 prevent the library from building on some platforms.
+
+==============================================================================
 
 Version 4.1.5
 =============
@@ -675,6 +721,8 @@ Building
 * Allow turning off gl_s, rle, and X11 support from the configure command line.
 * Fix for finding a 32 bit integer type on some platforms.
 * Only enable -Wall if we're using gcc.
+
+==============================================================================
 
 Version 4.1.4
 =============
@@ -699,6 +747,8 @@ several platforms.  Fix x86_64 builds to not hang the encoder.
   start using this version instead.  A recompile of your dependent code
   will be necessary in this case.
 
+==============================================================================
+
 Version 4.1.3
 =============
 This version fixes some bugs in the Extension writing code in
@@ -722,6 +772,8 @@ long Comments, and multi-block extensions read in from another file.
   subdirectory.  I don't have a Windows environment to test and maintain this
   but maybe someone out there will find it useful.  Caveat hacker.
 
+==============================================================================
+
 Version 4.1.2
 =============
 * Numerous bug fixes from people on the old libungif mailing list.
@@ -732,6 +784,8 @@ Version 4.1.2
 * Audited the sources with gcc -Wall. Everything detectable has now been fixed.
 * Ran the library code through indent.
   
+==============================================================================
+
 Version 4.1.1
 =============
 * Merge in many bug fixes that were sent in while I was hiking the
@@ -743,6 +797,8 @@ Version 4.1.1
   will let us get rid of our dependence on stdarg.h/varargs.h (Which a Gif
   reading library has no business requiring.)
 
+==============================================================================
+
 Version 4.1.0
 =============
 * Several minor memory leaks in error conditions have been plugged.
@@ -750,6 +806,8 @@ Version 4.1.0
   specified gif writing functions.
 * Old copyright notices in a few source files have been updated.  All library
   copyrights should now reflect the copyright notice in the COPYING file.
+
+==============================================================================
 
 Version 4.0.0 -- giflib
 =======================
@@ -760,6 +818,8 @@ that have been incorporated in libungif.
 
 PLEASE READ THE FILE PATENT_PROBLEMS BEFORE USING THIS LIBRARY!
 
+==============================================================================
+
 Version 4.0.0
 =============
 Major fixes have been made to the code that handles Extensions.
@@ -767,6 +827,8 @@ Unfortunately, this causes binary incompatibility with giflib-3.0 and
 libungif-3.x.  However, the API is still intact.  I am, however, deprecating
 the use of saveImage[x].Function.  Use
 saveImage[x].ExtensionBlocks[y].Function instead.
+
+==============================================================================
 
 Version 3.1.1
 =============
@@ -778,12 +840,16 @@ Version 3.1.1
  * New function DGifOpen to allow specifying a user definable gif reading
    function.
 
+==============================================================================
+
 Version 3.1.0
 =============
  * Add a new function:
         GifFileType *DGifOpen(void * userData, InputFunc readFunc)
    to read the gif image from a user defined input function.
  * A few bugfixes.
+
+==============================================================================
 
 Version 3.0
 ===========
@@ -802,9 +868,6 @@ Changes from Eric Raymond's libgif
   them from the rest of the library.
 * Fixed a few bugs in the tools in the utils directory.
 
-Version 3.0
-===========
-
 New features
 ------------
 * Incorporated Sirtaj Kang's changes to make both static and shared libs.
@@ -820,9 +883,13 @@ Bug fixes
 * Fix giftext to not core dump on a null extension record.
 * Incorporate Philip VanBaren's change to prevent a core dump in gifasm.
 
+==============================================================================
+
 Version 2.3
 ===========
 * Fixed a core-dump bug in gifcomb revealed by ELF environment in Linux 1.2.13.
+
+==============================================================================
 
 Version 2.2b
 ============
@@ -832,6 +899,8 @@ Version 2.2
 ===========
 * Linux is supported.
 
+==============================================================================
+
 Version 2.1
 ===========
 * Added the gifovly tool, which supports making a composite from several GIF
@@ -840,6 +909,8 @@ Version 2.1
   called gifcompose and lives in the util directory.
 * Added a copy of the GIF89 standard to the doc directory (gif89.txt);
   also a description of the preferred compression method (lzgif.txt).
+
+==============================================================================
 
 Version 2.0
 ===========
@@ -892,6 +963,8 @@ New Documentation and Examples
   so you can test new versions in util before installation for production
   (the top-level make script still does an install).
 
+==============================================================================
+
 Version 1.2
 ===========
 * GIFFIX - a new tool to attempt and fix broken GIF images. Currently fix
@@ -902,6 +975,8 @@ Version 1.2
 * New tools (RGB2GIF and GIF2RGB) to convert GIF to/from 24 bits RGB images.
 * New tool GIFROTAT to rotate a gif image by an arbitrary angle.
 * GifRSize was updated to resize by an arbitrary factor.
+
+==============================================================================
 
 Version 1.1
 ===========
@@ -917,5 +992,6 @@ Version 1.1
   see Dev2gif.c module.
 * Support for the new gif89a format has been added.
 
+==============================================================================
 
 
