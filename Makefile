@@ -221,29 +221,24 @@ uninstall-doc:
 version:
 	@echo $(VERSION)
 
-EXTRAS =     README.adoc \
-	     NEWS \
+EXTRAS =     NEWS \
 	     TODO \
 	     COPYING \
 	     getversion \
 	     ChangeLog \
-	     build.adoc \
-	     history.adoc \
 	     control \
-	     doc/whatsinagif \
-	     doc/gifstandard \
+	     local.dic
 
-DSOURCES = Makefile *.[ch]
-DOCS = doc/*.xml doc/*.1 doc/*.7 doc/*.html doc/index.html.in doc/00README doc/Makefile
-ALL =  $(DSOURCES) $(DOCS) tests pic $(EXTRAS)
+ALL =  Makefile *.[ch] *.adoc doc tests pic $(EXTRAS)
+
 giflib-$(VERSION).tar.gz: $(ALL)
-	$(TAR) --transform='s:^:giflib-$(VERSION)/:' -czf giflib-$(VERSION).tar.gz $(ALL)
-giflib-$(VERSION).tar.bz2: $(ALL)
-	$(TAR) --transform='s:^:giflib-$(VERSION)/:' -cjf giflib-$(VERSION).tar.bz2 $(ALL)
+	mkdir giflib-$(VERSION)
+	cp -r $(ALL) giflib-$(VERSION)
+	tar -czf giflib-$(VERSION).tar.gz giflib-$(VERSION)
+	rm -fr giflib-$(VERSION)
+	ls -l giflib-$(VERSION).tar.gz
 
 dist: giflib-$(VERSION).tar.gz giflib-$(VERSION).tar.bz2
-
-# Export
 
 # Verify the build
 distcheck: all
