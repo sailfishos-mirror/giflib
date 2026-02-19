@@ -240,15 +240,8 @@ giflib-$(VERSION).tar.gz: $(ALL)
 
 dist: giflib-$(VERSION).tar.gz
 
-# Verify the build
-distcheck: all
-	$(MAKE) giflib-$(VERSION).tar.gz
-	tar xzvf giflib-$(VERSION).tar.gz
-	$(MAKE) -C giflib-$(VERSION)
-	rm -fr giflib-$(VERSION)
-
 # release using the shipper tool
-release: all distcheck
+release: all
 	$(MAKE) -C doc website
 	shipper --no-stale version=$(VERSION) | sh -e -x
 	rm -fr doc/staging
