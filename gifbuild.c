@@ -240,6 +240,11 @@ static void Icon2Gif(char *FileName, FILE *txtin, bool GifNoisyPrint,
 				PARSE_ERROR("Too many color entries.");
 				exit(EXIT_FAILURE);
 			}
+			if (ColorMapSize >= PRINTABLES) {
+				PARSE_ERROR("Too many color entries for keyed "
+				            "color map.");
+				exit(EXIT_FAILURE);
+			}
 			ColorMap[ColorMapSize].Red = red;
 			ColorMap[ColorMapSize].Green = green;
 			ColorMap[ColorMapSize].Blue = blue;
