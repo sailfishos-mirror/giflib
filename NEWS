@@ -40,6 +40,8 @@ Code Fixes
 
 * Fix SF bug #162 detected memory leaks in GifMakeSavedImage giflib/gifalloc.c
 
+* Fix SF bug #161 detected memory leaks in EGifOpenFileHandle giflib/egif_lib.c
+
 * Fix SF bug #142 ABI breakpublic symbol GifQuantizeBuffer
 
 Other bugs that duplicate these have breen addressesed by these fixes

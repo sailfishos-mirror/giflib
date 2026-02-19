@@ -223,6 +223,11 @@ static void RGB2GIF(bool OneFileFlag, int NumFiles, char *FileName,
 	if (GifQuantizeBuffer(Width, Height, &ColorMapSize, RedBuffer,
 	                      GreenBuffer, BlueBuffer, OutputBuffer,
 	                      OutputColorMap->Colors) == GIF_ERROR) {
+		free((char *)RedBuffer);
+		free((char *)GreenBuffer);
+		free((char *)BlueBuffer);
+		free((char *)OutputBuffer);
+		GifFreeMapObject(OutputColorMap);
 		exit(EXIT_FAILURE);
 	}
 	free((char *)RedBuffer);
@@ -230,6 +235,8 @@ static void RGB2GIF(bool OneFileFlag, int NumFiles, char *FileName,
 	free((char *)BlueBuffer);
 
 	SaveGif(OutputBuffer, Width, Height, ExpNumOfColors, OutputColorMap);
+	free((char *)OutputBuffer);
+	GifFreeMapObject(OutputColorMap);
 }
 
 /******************************************************************************

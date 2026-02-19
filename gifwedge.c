@@ -35,8 +35,8 @@ int main(int argc, char **argv) {
 	int i, j, l, c, LevelStep, LogNumLevels, ErrorCode, Count = 0;
 	bool Error, LevelsFlag = false, SizeFlag = false, HelpFlag = false,
 	            GifNoisyPrint = false;
-	GifRowType Line;
-	ColorMapObject *ColorMap;
+	GifRowType Line = NULL;
+	ColorMapObject *ColorMap = NULL;
 	GifFileType *GifFile;
 
 	if ((Error = GAGetArgs(argc, argv, CtrlStr, &GifNoisyPrint, &LevelsFlag,
@@ -104,6 +104,7 @@ int main(int argc, char **argv) {
 	                      ColorMap) == GIF_ERROR) {
 		PrintGifError(GifFile->Error);
 	}
+	GifFreeMapObject(ColorMap);
 
 	/* Dump out the image descriptor: */
 	if (EGifPutImageDesc(GifFile, 0, 0, ImageWidth, ImageHeight, false,
@@ -140,6 +141,7 @@ int main(int argc, char **argv) {
 		}
 	}
 
+	free((char *)Line);
 	if (EGifCloseFile(GifFile, &ErrorCode) == GIF_ERROR) {
 		PrintGifError(ErrorCode);
 		exit(EXIT_FAILURE);

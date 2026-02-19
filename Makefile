@@ -16,9 +16,10 @@ MANDIR = $(PREFIX)/share/man
 DOCDIR = $(PREFIX)/share/doc/giflib
 
 CC ?= gcc
-OFLAGS = -O0 -g
+OFLAGS = -g -fno-inline #-fsanitize=address
 OFLAGS  = -O2
 CFLAGS  += -std=gnu99 -fPIC -Wall $(OFLAGS)
+#LDFLAGS += -fsanitize=address
 
 SHELL = /bin/sh
 TAR = tar

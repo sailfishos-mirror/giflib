@@ -635,8 +635,8 @@ int main(int argc, char **argv) {
 		(void)GifMakeSavedImage(GifFileOut, &GifFileIn->SavedImages[i]);
 	}
 
-	if (EGifSpew(GifFileOut) == GIF_ERROR) {
-		PrintGifError(GifFileOut->Error);
+	if (EGifSpewEx(GifFileOut, &ErrorCode) == GIF_ERROR) {
+		PrintGifError(ErrorCode);
 	} else if (DGifCloseFile(GifFileIn, &ErrorCode) == GIF_ERROR) {
 		PrintGifError(ErrorCode);
 	}

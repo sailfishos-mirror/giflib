@@ -130,6 +130,7 @@ GifFileType *EGifOpenFileName(const char *GifFileName,
 GifFileType *EGifOpenFileHandle(const int GifFileHandle, int *Error);
 GifFileType *EGifOpen(void *userPtr, OutputFunc writeFunc, int *Error);
 int EGifSpew(GifFileType *GifFile);
+int EGifSpewEx(GifFileType *GifFile, int *ErrorCode);
 const char *EGifGetGifVersion(GifFileType *GifFile); /* new in 5.x */
 int EGifCloseFile(GifFileType *GifFile, int *ErrorCode);
 
