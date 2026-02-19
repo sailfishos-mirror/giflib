@@ -812,6 +812,7 @@ static void DumpExtensions(GifFileType *GifFileOut, int ExtensionBlockCount,
 static void Gif2Icon(char *FileName, int fdin, int fdout, char NameTable[]) {
 	int ErrorCode, im, i, j, ColorCount = 0;
 	GifFileType *GifFile;
+	size_t name_len = strlen(NameTable);
 
 	if (fdin == -1) {
 		if ((GifFile = DGifOpenFileName(FileName, &ErrorCode)) ==
@@ -848,6 +849,9 @@ static void Gif2Icon(char *FileName, int fdin, int fdout, char NameTable[]) {
 
 		for (i = 0; i < GifFile->SColorMap->ColorCount; i++) {
 			if (GifFile->SColorMap->ColorCount < PRINTABLES) {
+				if ((size_t)i >= name_len) {
+					GIF_EXIT("Name table too short.");
+				}
 				printf("\trgb %03d %03d %03d is %c\n",
 				       GifFile->SColorMap->Colors[i].Red,
 				       GifFile->SColorMap->Colors[i].Green,
@@ -887,6 +891,10 @@ static void Gif2Icon(char *FileName, int fdin, int fdout, char NameTable[]) {
 				for (i = 0;
 				     i < image->ImageDesc.ColorMap->ColorCount;
 				     i++) {
+					if ((size_t)i >= name_len) {
+						GIF_EXIT(
+						    "Name table too short.");
+					}
 					printf(
 					    "\trgb %03d %03d %03d is %c\n",
 					    image->ImageDesc.ColorMap->Colors[i]
