@@ -13,6 +13,7 @@ BINDIR = $(PREFIX)/bin
 INCDIR = $(PREFIX)/include
 LIBDIR = $(PREFIX)/lib
 MANDIR = $(PREFIX)/share/man
+DOCDIR = $(PREFIX)/share/doc/giflib
 
 CC ?= gcc
 OFLAGS = -O0 -g
@@ -45,8 +46,8 @@ UNAME:=$(shell uname)
 # Rules
 
 .PHONY: all distcheck check reflow cppcheck spellcheck
-.PHONY: install install-bin install-include ibnstall-lib install-man
-.PHONY: uninstall uninstall-bin uninstall-include uninstall-lib uninstall-man
+.PHONY: install install-bin install-include ibnstall-lib install-man install-doc
+.PHONY: uninstall uninstall-bin uninstall-include uninstall-lib uninstall-man uninstall-doc
 .PHONY: version dist release refresh
 
 # Build
@@ -87,6 +88,8 @@ MANUAL_PAGES_7 = \
 	doc/giflib.xml
 
 MANUAL_PAGES = $(MANUAL_PAGES_1) $(MANUAL_PAGES_7)
+MANUAL_PAGES_1_MAN = $(MANUAL_PAGES_1:%.xml=%.1)
+MANUAL_PAGES_7_MAN = $(MANUAL_PAGES_7:%.xml=%.7)
 
 SOEXTENSION	= so
 LIBGIFSO	= libgif.$(SOEXTENSION)
@@ -164,7 +167,7 @@ spellcheck:
 ifeq ($(UNAME), Darwin)
 install: all install-bin install-include install-lib
 else
-install: all install-bin install-include install-lib install-man
+install: all install-bin install-include install-lib install-man install-doc
 endif
 
 install-bin: $(INSTALLABLE)
@@ -184,8 +187,15 @@ install-shared-lib:
 install-lib: install-static-lib install-shared-lib
 install-man:
 	$(INSTALL) -d "$(DESTDIR)$(MANDIR)/man1" "$(DESTDIR)$(MANDIR)/man7"
-	$(INSTALL) -m 644 $(MANUAL_PAGES_1:xml=1) "$(DESTDIR)$(MANDIR)/man1"
-	$(INSTALL) -m 644 $(MANUAL_PAGES_7:xml=7) "$(DESTDIR)$(MANDIR)/man7"
+	$(INSTALL) -m 644 $(MANUAL_PAGES_1_MAN) "$(DESTDIR)$(MANDIR)/man1"
+	$(INSTALL) -m 644 $(MANUAL_PAGES_7_MAN) "$(DESTDIR)$(MANDIR)/man7"
+install-doc:
+	$(MAKE) -C doc allhtml
+	$(INSTALL) -d "$(DESTDIR)$(DOCDIR)/html"
+	cd doc && $(INSTALL) -m 644 $$(echo *.html) "$(DESTDIR)$(DOCDIR)/html"
+	@if [ -f doc/giflib-logo.gif ]; then \
+		$(INSTALL) -m 644 doc/giflib-logo.gif "$(DESTDIR)$(DOCDIR)/html"; \
+	fi
 uninstall: uninstall-man uninstall-include uninstall-lib uninstall-bin
 uninstall-bin:
 	cd "$(DESTDIR)$(BINDIR)" && rm -f $(INSTALLABLE)
@@ -197,6 +207,8 @@ uninstall-lib:
 uninstall-man:
 	cd "$(DESTDIR)$(MANDIR)/man1" && rm -f $(shell cd doc >/dev/null && echo *.1)
 	cd "$(DESTDIR)$(MANDIR)/man7" && rm -f $(shell cd doc >/dev/null && echo *.7)
+uninstall-doc:
+	rm -rf "$(DESTDIR)$(DOCDIR)/html"
 
 # Export
 #
