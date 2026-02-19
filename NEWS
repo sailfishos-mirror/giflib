@@ -36,10 +36,17 @@ Code Fixes
 
 * Fix SF bug #170 Tests failing on Ubuntu Noble, giftext buffer overflow
 
-* FixSF bug #165 EGifSpew leaks GifFileOut->SColorMap
+* Fix SF bug #165 EGifSpew leaks GifFileOut->SColorMap
 
+* Fix SF bug #162 detected memory leaks in GifMakeSavedImage giflib/gifalloc.c
 
-Other bugs that duplicate these have breen addressesed by these fuxes
+* Fix SF bug #142 ABI breakpublic symbol GifQuantizeBuffer
+
+Other bugs that duplicate these have breen addressesed by these fixes
+
+* SF bug #156 EGifSpew leaks SavedImages (and more); won't fix, caller
+  might want to write a GIF, modify the in-memory data, then write
+  again.
 
 Tests
 -----
