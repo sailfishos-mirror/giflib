@@ -241,7 +241,7 @@ giflib-$(VERSION).tar.gz: $(ALL)
 dist: giflib-$(VERSION).tar.gz
 
 # release using the shipper tool
-release: all
+release: all giflib-$(VERSION).tar.gz
 	$(MAKE) -C doc website
 	shipper --no-stale version=$(VERSION) | sh -e -x
 	rm -fr doc/staging
