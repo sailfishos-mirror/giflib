@@ -11,6 +11,7 @@ gifbg - generate a test-pattern GIF
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <limits.h>
 
 #include "getarg.h"
 #include "gif_lib.h"

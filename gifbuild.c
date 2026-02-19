@@ -11,6 +11,8 @@ gifbuild - dump GIF data in a textual format, or undump it to a GIF
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <stdint.h>
+#include <limits.h>
 
 #include "getarg.h"
 #include "gif_lib.h"
