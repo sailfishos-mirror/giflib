@@ -78,12 +78,9 @@ bool getbool(char *from) {
 		}
 	}
 
-	if (sp == NULL) {
-		(void)fprintf(stderr,
-		              "giftool: %s is not a valid boolean argument.\n",
-		              // cppcheck-suppress nullPointerRedundantCheck
-		              sp->name);
-	}
+	(void)fprintf(stderr,
+	              "giftool: %s is not a valid boolean argument.\n",
+	              from);
 	exit(EXIT_FAILURE);
 }
 
