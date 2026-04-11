@@ -1,5 +1,16 @@
 			GIFLIB NEWS
 
+Repository head
+===============
+
+Code fixes
+----------
+
+* Fix SF bugs #194, #195, #196, #197: these were in the gif_fiont.c
+  code, which is a historical relic not affecting general library clients.
+
+* Fix SF bug #193, double free on malicious GIF when built with reallocarray.
+
 Version 6.1.2
 =============
 
@@ -73,7 +84,7 @@ Code Fixes
 
 * Fix SF bug #142 ABI break public symbol GifQuantizeBuffer
 
-Other bugs that duplicate these have breen addressesed by these fixes
+Other bugs that duplicate these have been addressesed by these fixes
 
 * SF bug #156 EGifSpew leaks SavedImages (and more); won't fix, caller
   might want to write a GIF, modify the in-memory data, then write
